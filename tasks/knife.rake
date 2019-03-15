@@ -4,7 +4,7 @@ namespace :knife do
     node          = args[:node]
     ssh_user      = Rake::Knife.ssh_user(args)
     identity_file = Rake::Knife.key(args)
-    node_name     = args[:node_name]
+    node_name     = Rake::Knife.node_name(args)
 
     system("knife bootstrap #{node} --ssh-user #{ssh_user} --sudo --identity-file #{identity_file} --node-name #{node_name}")
   end
