@@ -29,9 +29,14 @@ namespace :knife do
   end
 
   namespace :node do
-    desc 'node runlist add'
-    task :add , %i[node run_list] do |task, args|
-      system("knife node run_list add #{args[:node]} #{args[:run_list]}")
+    desc 'runlist item add'
+    task :add , %i[node run_list_item] do |task, args|
+      system("knife node run_list add #{args[:node]} #{args[:run_list_item]}")
+    end
+
+    desc 'runlist item remove'
+    task :remove , %i[node run_list_item] do |task, args|
+      system("knife node run_list remove #{args[:node]} #{args[:run_list_item]}")
     end
   end
 end
