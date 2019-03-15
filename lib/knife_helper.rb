@@ -15,7 +15,6 @@ module Rake
     end
     
     def env_file(args)
-      puts "ENV_FILE: #{args[:env_file]}" 
       return args[:env_file] if args[:env_file].include?('/')
       
       Constants::ENV_DIR + args[:env_file]
