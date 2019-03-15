@@ -18,14 +18,16 @@ namespace :knife do
     system("knife ssh -x '#{ssh_user}' -i #{Rake::Knife.key(args)} 'name:#{node}' 'sudo chef-client'")
   end
 
-  desc 'environment from file'
-  task :environment_from_file , %i[env_file] do |task, args|
-    system("knife environment from file #{Rake::Knife.env_file(args)}")
-  end
-
   desc 'cookbook upload'
   task :cookbook_upload , %i[cookbook_name] do |task, args|
     system("knife cookbook_upload #{args[:cookbook_name]}")
+  end
+
+  namespace :environment do
+    desc 'from file'
+    task :from_file , %i[env_file] do |task, args|
+      system("knife environment from file #{Rake::Knife.env_file(args)}")
+    end
   end
 
   namespace :node do
@@ -37,6 +39,11 @@ namespace :knife do
     desc 'runlist item remove'
     task :remove , %i[node run_list_item] do |task, args|
       system("knife node run_list remove #{args[:node]} #{args[:run_list_item]}")
+    end
+
+    desc 'environment set'
+    task :environment_set , %i[node environment] do |task, args|
+      system("knife node environment_set #{args[:node]} #{args[:environment]}")
     end
   end
 end
