@@ -27,4 +27,16 @@ namespace :knife do
   task :cookbook_upload , %i[cookbook_name] do |task, args|
     system("knife cookbook_upload #{args[:cookbook_name]}")
   end
+
+  namespace :node do
+    desc 'runlist item add'
+    task :add , %i[node run_list_item] do |task, args|
+      system("knife node run_list add #{args[:node]} #{args[:run_list_item]}")
+    end
+
+    desc 'runlist item remove'
+    task :remove , %i[node run_list_item] do |task, args|
+      system("knife node run_list remove #{args[:node]} #{args[:run_list_item]}")
+    end
+  end
 end
