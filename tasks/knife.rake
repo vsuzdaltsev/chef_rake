@@ -18,9 +18,11 @@ namespace :knife do
     system("knife ssh -x '#{ssh_user}' -i #{Rake::Knife.key(args)} 'name:#{node}' 'sudo chef-client'")
   end
 
-  desc 'cookbook upload'
-  task :cookbook_upload , %i[cookbook_name] do |task, args|
-    system("knife cookbook_upload #{args[:cookbook_name]}")
+  namespace :cookbook do
+    desc 'upload'
+    task :upload , %i[cookbook_name] do |task, args|
+      system("knife cookbook_upload #{args[:cookbook_name]}")
+    end
   end
 
   namespace :environment do
