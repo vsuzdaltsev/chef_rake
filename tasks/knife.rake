@@ -35,11 +35,13 @@ namespace :knife do
   namespace :node do
     desc 'runlist item add'
     task :add , %i[node run_list_item] do |task, args|
+      next puts "* run_list_item seems to be default, so add nothing to #{args[:node]}" if args[:run_list_item].eql?('run_list_item')
       system("knife node run_list add #{args[:node]} #{args[:run_list_item]}")
     end
 
     desc 'runlist item remove'
     task :remove , %i[node run_list_item] do |task, args|
+      next puts "* run_list_item seems to be default, so delete nothing from #{args[:node]}" if args[:run_list_item].eql?('run_list_item')
       system("knife node run_list remove #{args[:node]} #{args[:run_list_item]}")
     end
 
