@@ -13,9 +13,15 @@ namespace :knife do
   task :run_chef_client, %i[node ssh_user identity_file] do |task, args|
     node          = args[:node]
     ssh_user      = Rake::Knife.ssh_user(args)
-    identity_file = Rake::Knife.key(args)
 
     system("knife ssh -x '#{ssh_user}' -i #{Rake::Knife.key(args)} 'name:#{node}' 'sudo chef-client'")
+  end
+
+  namespace :config do
+    desc 'list profiles'
+    task :list_profiles do |_task|
+      system("knife config list-profiles")
+    end
   end
 
   namespace :cookbook do
