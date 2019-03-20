@@ -1,5 +1,5 @@
 namespace :knife do
-  desc 'bootstrap'
+  desc 'bootstrap node'
   task :bootstrap, %i[node ssh_user identity_file node_name] do |_task, args|
     node          = args[:node]
     ssh_user      = Rake::Knife.ssh_user(args)
@@ -13,8 +13,9 @@ namespace :knife do
   task :run_chef_client, %i[node ssh_user identity_file] do |_task, args|
     node          = args[:node]
     ssh_user      = Rake::Knife.ssh_user(args)
+    key           = Rake::Knife.key(args)
 
-    system("knife ssh -x '#{ssh_user}' -i #{Rake::Knife.key(args)} 'name:#{node}' 'sudo chef-client'")
+    system("knife ssh -x '#{ssh_user}' -i #{key} 'name:#{node}' 'sudo chef-client'")
   end
 
   namespace :ssl do
@@ -26,21 +27,21 @@ namespace :knife do
   end
 
   namespace :config do
-    desc 'list profiles'
+    desc 'config list profiles'
     task :list_profiles do |_task|
       system('knife config list-profiles')
     end
   end
 
   namespace :cookbook do
-    desc 'upload'
+    desc 'upload cookbook'
     task :upload, %i[cookbook_name] do |_task, args|
       system("knife cookbook_upload #{args[:cookbook_name]}")
     end
   end
 
   namespace :environment do
-    desc 'from file'
+    desc 'environment from file'
     task :from_file, %i[env_file] do |_task, args|
       system("knife environment from file #{Rake::Knife.env_file(args)}")
     end
