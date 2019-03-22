@@ -40,7 +40,7 @@ namespace :knife do
     end
 
     desc 'cookbook list'
-    task :list, %i[profile env] do |_task, args|
+    task :list, %i[default env] do |_task, args|
       profile = Rake::Knife.profile(args)
       env     = args[:env]
       system("knife cookbook list --profile #{profile} -E #{env}")
