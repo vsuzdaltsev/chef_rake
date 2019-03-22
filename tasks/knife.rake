@@ -38,6 +38,13 @@ namespace :knife do
     task :upload, %i[cookbook_name] do |_task, args|
       system("knife cookbook_upload #{args[:cookbook_name]}")
     end
+
+    desc 'cookbook list'
+    task :list, %i[profile env] do |_task, args|
+      profile = Rake::Knife.profile(args)
+      env     = args[:env]
+      system("knife cookbook list --profile #{profile} -E #{env}")
+    end
   end
 
   namespace :environment do
