@@ -27,9 +27,9 @@ module Rake
     end
 
     def profile(args)
-      return Constants::PROFILE if args[:default].eql?('default')
+      return Constants::PROFILE if args[:default_profile].eql?('default_profile')
 
-      args[:default]
+      args[:default_profile]
     end
   end
 end
