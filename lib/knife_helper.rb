@@ -3,7 +3,7 @@ module Rake
     module_function
 
     def key(args)
-      return Constants::IDENTITY_FILE.call(args) if args[:identity_file].eql?('identity_file') 
+      return Constants::IDENTITY_FILE.call(args) if args[:identity_file].eql?('identity_file')
 
       args[:identity_file]
     end
@@ -22,8 +22,14 @@ module Rake
 
     def env_file(args)
       return args[:env_file] if args[:env_file].include?('/')
-      
+
       Constants::ENV_DIR + args[:env_file]
+    end
+
+    def profile(args)
+      return Constants::PROFILE if args[:default].eql?('default')
+
+      args[:default]
     end
   end
 end

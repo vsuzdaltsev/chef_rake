@@ -5,6 +5,7 @@ module Rake
       SSH_USER      ||= 'vagrant'.freeze
       ENV_DIR       ||= 'environments/'.freeze
       NODE_NAME     ||= ->(args) { args[:node] }.freeze
+      PROFILE       ||= 'default'
     end
   end
 end
