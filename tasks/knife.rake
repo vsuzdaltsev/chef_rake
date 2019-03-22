@@ -47,6 +47,15 @@ namespace :knife do
     end
   end
 
+  namespace :search do
+    desc 'search node'
+    task :search_node, %i[item default_profile env] do |_task, args|
+      profile = Rake::Knife.profile(args)
+      env     = args[:env]
+      system("knife search node #{args[:item]} --profile #{profile} -E #{env} -iFj")
+    end
+  end
+
   namespace :environment do
     desc 'environment from file'
     task :from_file, %i[env_file] do |_task, args|
