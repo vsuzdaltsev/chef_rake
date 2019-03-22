@@ -20,7 +20,7 @@ namespace :knife do
 
   namespace :ssl do
     desc 'check chef server'
-    task :check_profile, %i[default] do |_task, args|
+    task :check_profile, %i[default_profile] do |_task, args|
       profile = Rake::Knife.profile(args)
       system("knife ssl check --profile #{profile}")
     end
@@ -40,7 +40,7 @@ namespace :knife do
     end
 
     desc 'cookbook list'
-    task :list, %i[default env] do |_task, args|
+    task :list, %i[default_profile env] do |_task, args|
       profile = Rake::Knife.profile(args)
       env     = args[:env]
       system("knife cookbook list --profile #{profile} -E #{env}")
