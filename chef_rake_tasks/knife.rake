@@ -48,7 +48,7 @@ namespace :knife do
   end
 
   namespace :search do
-    desc 'search node'
+    desc 'search node: rake knife:search:node\['recipes:git_to_chef',default_profile,dev\]'
     task :node, %i[item default_profile env] do |_task, args|
       profile = Rake::Knife.profile(args)
       env     = args[:env]
