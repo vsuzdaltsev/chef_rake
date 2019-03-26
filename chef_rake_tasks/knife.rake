@@ -50,7 +50,12 @@ namespace :knife do
   namespace :cookbook do
     desc 'upload cookbook'
     task :upload, %i[cookbook_name] do |_task, args|
-      system("knife cookbook_upload #{args[:cookbook_name]}")
+      system("knife cookbook upload #{args[:cookbook_name]}")
+    end
+
+    desc 'delete cookbook'
+    task :delete, %i[cookbook_name] do |_task, args|
+      system("knife cookbook delete #{args[:cookbook_name]}")
     end
 
     desc 'cookbook list'
