@@ -18,6 +18,20 @@ namespace :knife do
     system("knife ssh -x '#{ssh_user}' -i #{key} 'name:#{node}' 'sudo chef-client'")
   end
 
+  namespace :data_bag do
+    desc 'list data bags'
+    task :list, %i[default_profile] do |_task, args|
+      profile = Rake::Knife.profile(args)
+      system("knife data bag list --profile #{profile}")
+    end
+
+    desc 'data bag show'
+    task :show, %i[default_profile data_bag item] do |_task, args|
+      profile = Rake::Knife.profile(args)
+      system("knife data bag show --profile #{profile} #{args[:data_bag]} #{args[:item]}")
+    end
+  end
+
   namespace :ssl do
     desc 'check chef server'
     task :check_profile, %i[default_profile] do |_task, args|
